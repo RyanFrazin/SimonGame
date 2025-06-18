@@ -1,13 +1,20 @@
 gamePattern = [];
 userClickedPattern = [];
 buttonColors = ["red", "blue", "green", "yellow"];
+var level = 0;
+
+$(document).keypress(function() {
+    nextSequence();
+});
 
 function nextSequence() {
     var randomNumber = Math.floor(Math.random() * 4); // Generates a random number between 1 and 3
     var randomChosenColor = buttonColors[randomNumber];
     gamePattern.push(randomChosenColor);
+    level++;
 
     $("#" + randomChosenColor).fadeOut(100).fadeIn(100);
+    $("#level-title").text("level" + " " + level);
 
     playSound(randomChosenColor);
 }
