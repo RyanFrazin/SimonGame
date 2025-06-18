@@ -47,6 +47,8 @@ function animatePress(currentColor) {
 }
 
 function checkAnswer(currentLevel) {
+    var wrongAudio = new Audio("sounds/wrong.mp3");
+
     if(userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
         console.log("success");
 
@@ -54,10 +56,23 @@ function checkAnswer(currentLevel) {
             setTimeout(function () {
                 nextSequence();
             }, 1000);
-
         }
-
     } else {
-        console.log("wrong");
+        wrongAudio.play();
+       
+        $("body").addClass("game-over");
+        
+        setTimeout(function() {
+            $("body").removeClass("game-over");
+        }, 200);
+
+        $("h1").text("Game Over, Press Any Key to Restart");
+
+        startOver();
     }
+}
+
+function startOver() {
+    level = 0;
+    gamePattern = [];
 }
